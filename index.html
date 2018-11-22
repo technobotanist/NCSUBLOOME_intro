@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Plant Education in VR</title>
+    <meta name="description" content="Plant Education in VR">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+<script src="./aframe-extras.min.js"></script>
+    <script src="./gblock.js"></script>
+    <script src="./aframe-audioanalyser-component.js"></script>
+    <script src="./audio-level-scale-component.js"></script>
+    <script src="./frequency-spectrum-component.js"></script>
+    <script src="./spectrogram-component.js"></script>
+      <script src="https://unpkg.com/aframe-text-geometry-component@^0.5.0/dist/aframe-text-geometry-component.min.js"></script>
+      <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
+      <script src="./aframe-curve-component.min.js"></script>
+  <script src="./aframe-alongpath-component.min.js"></script>
+   
+  
+ 
+    
+
+  </head>
+  <body>
+    <a-scene fog="density: 0.04; color: #c7c7c7; near: 15; far: 85; type: exponential">
+<!-- fog="density: 0.04; color: #c7c7c7; near: 15; far: 85; type: exponential" -->
+      
+        <audio
+           id="song"
+           src="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2FCarolina-%20MassageTableRecords.m4a?1532995893286"
+           crossorigin="anonymous"
+               loop= "true"
+         ></audio>
+      
+        <a-assets>
+        <img id="#medit" src="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2F42411853801_a41048b917_o.jpg?1533000222340">
+        <img id="Bricksrc" src="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Fbrick_4_diff_1k.jpg?1534711417123">
+        <img id="BrickAO" src="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Fbrick_4_AO_1k.jpg?1534711419145">
+        <img id="Brickdisp" src="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Fbrick_4_disp_1k.jpg?1534711418094">
+        <img id="Bricknorm" src="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Fbrick_4_nor_1k.jpg?1534711419312">
+       </a-assets>
+     
+      
+      <a-sky id="largesky"
+             src="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2F42411853801_a41048b917_o.jpg?1533000222340" 
+       material=""
+       geometry="radius:100"
+       position="0 -3.989936620045853 0" 
+       scale="6 6 6"></a-sky>
+   
+      <!-- At North Carolina State University, we're bringing plant biology education to life using Virtual Reality -->
+
+<a-entity id="text" position="-9.373916704070687 5.256139805113838 -0.73608346711789" rotation="0 4.48840142201431 0" scale="0.9 1.5 0.5" mixin="null">
+        <a-entity position="-26 3.376709380815556 52" scale="0.1 0.2 0.5" mixin="boldFont" text-geometry="value:At                                 ;curveSegments:4;height:0.3;size:6;weight:bold;bevelThickness:20" material="color:#ff0000" shadow=""></a-entity>
+        <a-entity position="-26 2.45 52" scale="0.2 0.5 0.5" mixin="boldFont" text-geometry="value:we're bringing plant biology education to;curveSegments:4;height:0.3;size:1.85;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+        <a-entity position="-26 0.85 52" mixin="boldFont" text-geometry="value:LIFE;curveSegments:4;height:0.3;size:1.4;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+        <a-entity position="-26 0.3 52" scale="0.2 0.2 0.5" mixin="boldFont" text-geometry="value:USING VIRTUAL REALITY;curveSegments:4;height:0.3;size:1.4;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+
+  <a-entity mixin="boldFont" text-geometry="curveSegments:4;height:0.3;size:1.4" material="color:#ff0000" shadow=""></a-entity>
+      </a-entity>
+      
+      
+
+      
+      <a-entity id="rig" movement-controls="constrainToNavMesh: false;speed: .25; controls: gamepad,trackpad,keyboard,touch; rotation: 0 180 0" 
+                position="-23.569 3.200 39.264" > 
+            <a-entity camera="active:true;far:80" 
+                      rotation="3.2085636527326034 110.0078966651181 0"
+                     look-controls="" 
+                      data-aframe-inspector-original-camera=""></a-entity> 
+<a-sky src="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2F42411853801_a41048b917_o.jpg?1533000222340" 
+       material=""
+       geometry="radius:75"
+       position="0 -3.989936620045853 0" 
+       scale="1 1 1"></a-sky> 
+      </a-entity>
+ 
+      
+      
+<!--   Main Sign     -->
+      <a-image id="ASPBLogo" 
+               src="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2FASPB_Vector_Seal_png_transparent-300x297.png?1536034579807" 
+               geometry="height:3;width:3" 
+               position="-25.07632308429151 7.059416568976518 26.686036527394588" 
+               rotation="0 4.68 0" 
+               material=""></a-image>
+
+<a-image id="LibrariesLogo"
+         src="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2FncsuLiblogo.png?1535070462658"
+         geometry="height:3;width:3"
+         position="-22.139902743313314 7.153704215771292 26.686" 
+         rotation="0 4.68 0" 
+         material=""></a-image>
+
+<a-image id="PMBLogo" 
+         src="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Fimage.png?1535073656889" 
+         geometry="height:3;width:2"
+         position="-19.574288690402042 7.1061471579509785 26.06457597011674" 
+         rotation="0 4.68 0" 
+         material=""></a-image>
+      
+     <a-image id="NCSULogo" 
+              src="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Fbrick4x1.jpg?1536034582431"
+              geometry="width:8;height:2" 
+              position="-25.7054577677973 11.121895483261556 26.575"
+              rotation="0 4.68 0"
+              material="height:512;width:2048"></a-image>
+      
+<!-- WallThanks   -->
+      
+<a-entity id="ThanksTextLarge" position="4.215353581898025 -14.205941076746093 9.41155954870275" rotation="0 -44.04205297652367 0" scale="7 7 7">
+        <a-entity position="0 3.35 0" scale="0.1 0.2 0.5" mixin="boldFont" text-geometry="value:THANK YOU;curveSegments:4;height:0.3;size:4.5;weight:bold" material="color:#ff0000" shadow=""></a-entity>
+<a-entity position="-0.3522505377152573 2.45 -0.02925267984955677" scale="0.2780619884160613 0.5 0.5" mixin="boldFont" text-geometry="value:Grant Support:;curveSegments:4;height:0.3;size:1;weight:bold" material="color:#ffffff" shadow=""></a-entity>   <a-entity mixin="boldFont" text-geometry="curveSegments:4;height:0.3;size:1" material="color:#ff0000" shadow=""></a-entity>
+<a-entity position="-1.8178112791554528 2.5638111294817882 6.021135408523385" scale="0.012482464322128657 0.03969368416296338 0.03" mixin="boldFont" text-geometry="value:Meet Our Team;curveSegments:4;height:0.3;size:4.5;weight:bold" material="color:#ff0000" shadow="" rotation="0 50.890068845808024 0"></a-entity>
+<a-entity position="-0.4374119010007188 2.6777743732651635 4.459739853090273" scale="0.012482464322128657 0.01678182750836273 0.03" mixin="boldFont" text-geometry="value:Desktop Users:;curveSegments:4;height:0.3;size:4.5;weight:bold" material="color:#ff0000" shadow="" rotation="0 47.420526043844 0"></a-entity>
+  <a-entity position="-1.8112100931087305 2.442 6.01226095349235" scale="0.0365636666891343 0.03969368416296338 0.03" mixin="boldFont" text-geometry="value:<----;curveSegments:4;height:0.3;size:4.5;weight:bold" material="color:#ffffff" shadow="" rotation="0 50.890068845808024 0"></a-entity> 
+  <a-image id="ASPBLogoThanks" src="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2FASPB_Vector_Seal_png_transparent-300x297.png?1536034579807" geometry="" material="" position="2.633399589035714 2.7964238946045605 0.1175434844091765"></a-image>
+<a-image id="keys" src="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Farrow%20keys.png?1536074921441" geometry="" material="" position="-0.32266342504449924 2.545 4.349159143183187" rotation="0 47.420526043844 0" scale="0.4 0.4 0.3"></a-image>
+<a-image id="mouse" src="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2FMouse-icon.png?1536075164649" geometry="" material="" position="-0.1447942354561308 2.5635348124712034 4.155771108371949" rotation="0 46.08315741107353 0" scale="0.2 0.2 0.1"></a-image>
+  <a-entity position="1.6180529970865145 2.1583046980917318 0.06347408678406016" scale="0.06 0.15 0.15" mixin="boldFont" text-geometry="value:American Society of Plant Biologists BLOOME Grant;curveSegments:4;height:0.3;size:1;weight:bold" material="color:#ff0000" shadow=""></a-entity>      </a-entity>
+      
+      <a-entity id="ThanksTextsmallMedia" position="4.215353581898025 -14.205941076746093 9.41155954870275" rotation="0 -44.04205297652367 0" scale="7 7 7">
+  <a-entity position="3.6538977818413185 3 0.06740024599715255" scale="0.06 0.15 0.15" mixin="boldFont" text-geometry="value:Creative Commons Media:;curveSegments:4;height:0.3;size:1;weight:bold" material="color:#ff0000" shadow=""></a-entity>
+    <a-entity position="3.6538977818413185 2.8 0.06740024599715255" scale="0.06 0.15 0.15" mixin="boldFont" text-geometry="value:Google Poly (Volcano, Low-Poly Tree models);curveSegments:4;height:0.3;size:1;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+  <a-entity position="3.6538977818413185 2.6 0.06740024599715255" scale="0.06 0.15 0.15" mixin="boldFont" text-geometry="value:Turbosquid user Ibrahmduman (Signboard models);curveSegments:4;height:0.3;size:1;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+  <a-entity position="3.6538977818413185 2.4 0.06740024599715255" scale="0.06 0.15 0.15" mixin="boldFont" text-geometry="value:Flikr user Sitoo (Skybox Image);curveSegments:4;height:0.3;size:1;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+  <a-entity mixin="boldFont" text-geometry="curveSegments:4;height:0.3;size:1" material="color:#ff0000" shadow=""></a-entity>
+      </a-entity>
+      
+            <a-entity id="ThanksTextsmallExtensions" position="4.215353581898025 -6 9.41155954870275" rotation="0 -44.04205297652367 0" scale="7 7 7">
+  <a-entity position="3.6538977818413185 3 0.06740024599715255" scale="0.06 0.15 0.15" mixin="boldFont" text-geometry="value:The A-Frame community, specifically:;curveSegments:4;height:0.3;size:1;weight:bold" material="color:#ff0000" shadow=""></a-entity>
+    <a-entity position="3.6538977818413185 2.8 0.06740024599715255" scale="0.06 0.15 0.15" mixin="boldFont" text-geometry="value:A-Frame authors- Kevin Ngo, Diego Marcos, Fernando Serrano, 
+Casey Yee, Chris Van Wiemeersch, Josh Carpenter, and Kip Gilbert;curveSegments:4;height:0.3;size:1;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+  <a-entity position="3.6538977818413185 2.2 0.06740024599715255" scale="0.06 0.15 0.15" mixin="boldFont" text-geometry="value:Extension authors- Don McCurdy, Tomas Polach & Archilogic;curveSegments:4;height:0.3;size:1;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+  <a-entity mixin="boldFont" text-geometry="curveSegments:4;height:0.3;size:1" material="color:#ff0000" shadow=""></a-entity>
+      </a-entity>
+      
+      <a-entity id="ThanksTest" position="18.506012555955994 -6 23.266" rotation="0 -44.042 0" scale="7 7 7">
+  <a-entity position="3.654 3 0.067" scale="0.06 0.15 0.15" mixin="boldFont" text-geometry="value:The North Carolina State University community, especially:;curveSegments:4;height:0.3;size:1;weight:bold" material="color:#ff0000" shadow=""></a-entity>
+    <a-entity position="3.6538977818413185 2.8 0.06740024599715255" scale="0.06 0.15 0.15" mixin="boldFont" text-geometry="value:NCSU Libraries Virtual Reality- Peter Schreiner, David Woodbury, Dan Hawkins;curveSegments:4;height:0.3;size:1;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+  <a-entity position="3.6538977818413185 2.4 0.06740024599715255" scale="0.06 0.15 0.15" mixin="boldFont" text-geometry="value:Demo Tests and Design Feedback- Shadrick Addy, Jack Wingo, Chip Parrish;curveSegments:4;height:0.3;size:1;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+  <a-entity position="3.6538977818413185 2.6 0.06740024599715255" scale="0.06 0.15 0.15" mixin="boldFont" text-geometry="value:Proposal Editing and Feedback- Dr. William Thompson, Dr. Margo Daub, Eric Land;curveSegments:4;height:0.3;size:1;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+ <a-entity position="3.6538977818413185 2.2 0.06740024599715255" scale="0.06 0.15 0.15" mixin="boldFont" text-geometry="value:3D Scanning, Photogrammetry Assistance- Cara Black;curveSegments:4;height:0.3;size:1;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+  <a-entity mixin="boldFont" text-geometry="curveSegments:4;height:0.3;size:1" material="color:#ff0000" shadow=""></a-entity>
+      </a-entity>
+      
+<a-entity id="Collaborators" position="18.506012555955994 -14.205941076746093 23.266" rotation="0 -44.042 0" scale="7 7 7">
+  <a-entity position="3.654 3 0.067" scale="0.06 0.15 0.15" mixin="boldFont" text-geometry="value:Additional Collaborators:;curveSegments:4;height:0.3;size:1;weight:bold" material="color:#ff0000" shadow=""></a-entity>
+    <a-entity position="3.6538977818413185 2.8 0.06740024599715255" scale="0.06 0.15 0.15" mixin="boldFont" text-geometry="value:Music by Massage Table Records- Alex Belensz, Max Jacobson, 
+                                                       Colin Keenan, Greg Printy;curveSegments:4;height:0.3;size:1;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+  <a-entity position="3.6538977818413185 2.35 0.06740024599715255" scale="0.06 0.15 0.15" mixin="boldFont" text-geometry="value:Botanical Illustration by Preston Montague;curveSegments:4;height:0.3;size:1;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+  <a-entity mixin="boldFont" text-geometry="curveSegments:4;height:0.3;size:1" material="color:#ff0000" shadow=""></a-entity>
+      </a-entity>
+      
+<!--      Lights  -->
+<a-entity light="color:white;type:ambient;intensity:1.15" data-aframe-default-light="" aframe-injected=""></a-entity>
+  <a-light color="white" intensity="1" position="57.03252975171554 1446.0688706515466 2" rotation="-77.12890533947221 9.768934063110084 -26.65227321854131" light="type:point;intensity:1"></a-light> 
+
+      
+<!--  <a-light  
+        type="directional" 
+        color="white" 
+        intensity="1.05" 
+        ></a-light> -->
+      
+  
+<!--  Skyline guards      -->
+      <a-box id="guard1" 
+               src="#Bricksrc" 
+               ambient-occlusion-map="#BrickAO"
+               displacement-map="#Brickdisp" 
+               normal-map="#Bricknorm" 
+               geometry="" 
+               material="repeat:10 2;side:double;shader:flat"
+               position="28.998 8 33.011" scale="80 17 2" rotation="0 135.932 180"></a-box>
+   
+      <a-box id="guard2" 
+               src="#Bricksrc" 
+               ambient-occlusion-map="#BrickAO"
+               displacement-map="#Brickdisp" 
+               normal-map="#Bricknorm" 
+               geometry="" 
+               material="repeat:10 2;side:double;shader:flat"
+               position="112.35030799480776 8 1.578730823860461" 
+               scale="80 17 2" 
+               rotation="-7.062250076880254e-31 75.5862139449101 180"></a-box>
+
+<a-box id="guard3" 
+         src="#Bricksrc" 
+               ambient-occlusion-map="#BrickAO"
+               displacement-map="#Brickdisp" 
+               normal-map="#Bricknorm" 
+               geometry="" 
+               material="repeat:10 2;side:double;shader:flat"
+         position="6.760316737292591 8 -21.79448965048467" 
+         scale="54.16614524051386 17 2"
+         rotation="-7.062250076880254e-31 75.5862139449101 180"></a-box>
+
+<a-box id="guard4" 
+         src="#Bricksrc" 
+               ambient-occlusion-map="#BrickAO"
+               displacement-map="#Brickdisp" 
+               normal-map="#Bricknorm" 
+               geometry="" 
+               material="repeat:10 2;side:double;shader:flat"
+         position="-51.768847954516986 8 -22.27306568852815"
+         scale="54.16614524051386 17 2"
+         rotation="-7.062250076880254e-31 75.5862139449101 180"></a-box>
+
+      <a-box id="guard5"
+               src="#Bricksrc" 
+               ambient-occlusion-map="#BrickAO"
+               displacement-map="#Brickdisp" 
+               normal-map="#Bricknorm" 
+               geometry="" 
+               material="repeat:10 2;side:double;shader:flat"
+               position="-60.67502659609155 8 -89.29734259511497"
+               scale="80 17 2" 
+               rotation="-7.062250076880254e-31 75.5862139449101 180"></a-box>
+      
+      <a-box id="guard6"
+               src="#Bricksrc" 
+               ambient-occlusion-map="#BrickAO"
+               displacement-map="#Brickdisp" 
+               normal-map="#Bricknorm" 
+               geometry="" 
+               material="repeat:10 2;side:double;shader:flat"
+               position="6.014562345465993 15.462606732366588 -77.47220224180587"
+               scale="137.9880041924789 31.845524024423028 2" 
+               rotation="-1.0372679800417873e-30 178.0068052948676 180"></a-box>
+      
+      <a-box id="guard7" src="#Bricksrc" 
+             ambient-occlusion-map="#BrickAO" 
+             displacement-map="#Brickdisp" 
+             normal-map="#Bricknorm" 
+             geometry="" 
+             material="repeat:10 2;side:double;shader:flat" 
+             position="75.27680873261976 15.463 -91.545" 
+             scale="96.43684849999966 31.846 2" 
+             rotation="-7.062250076880254e-31 91.59671122098653 180"></a-box>
+      
+      <a-box id="guard8" src="#Bricksrc" 
+               ambient-occlusion-map="#BrickAO"
+               displacement-map="#Brickdisp" 
+               normal-map="#Bricknorm" 
+               geometry="" 
+               material="repeat:10 2;side:double;shader:flat"
+               position="3.349469924613601 15.462606732366588 140.4353521676342" 
+               scale="137.9880041924789 31.845524024423028 2" 
+               rotation="0 135.932 180"></a-box>
+
+      
+      
+      <!-- Mountainscape bounces to Bass -->
+      <a-sphere gblock="https://poly.google.com/view/dwSigTeSMCo"
+                color="green" scale="120 120 100" 
+                position="-165.09 32.07 27.239325933093298" 
+                ></a-sphere>
+      
+<a-sphere 
+          gblock="https://poly.google.com/view/dwSigTeSMCo" 
+          color="green" scale="120 120 100" 
+          position="-167.50312862038433 33.330793301894366 -105.963341086484757" 
+          ></a-sphere>
+      
+      
+     <a-entity id="#walk" position="-375.311 0 165.384" rotation="0 150.787 0">
+     
+<a-box id="#glowforestscene" gblock="https://poly.google.com/view/6zGFsSZkAss" position="-171.144 -0.4169012611765339 111.982" scale="20 15 20" rotation="1.987846675914698e-16 -128.6115605384713 -1.2919999999999994" material="" geometry=""></a-box>    
+        <a-box id="#sunflowers" gblock="https://poly.google.com/view/2SK_cDFDz-y" position="-133.06349029970553 -0.1020876846443537 110.54720269751239" scale="8 5 8" rotation="-0.9723886116101698 124.21410727391982 -1.9531235914508571" material="" geometry=""></a-box><a-box id="#sunflowers-2" gblock="https://poly.google.com/view/2SK_cDFDz-y" position="-158.53669894046473 -0.1020876846443537 79.74492074247186" scale="8 5 8" rotation="-0.9723886116101704 166.0967835382061 -1.9531235914508571" material="" geometry=""></a-box>
+      
+      <a-box id="#sunflowers2" gblock="https://poly.google.com/view/2SK_cDFDz-y" position="-203.33453999654628 -0.1020876846443537 102.21802766346613" scale="6 5 6" rotation="-0.9723886116101708 -108.91908079655731 -1.9531235914508567" material="" geometry=""></a-box>        </a-entity>
+    
+      <a-box id="#sunflowers-3" gblock="https://poly.google.com/view/2SK_cDFDz-y" position="-212.46130752535635 -0.1020876846443537 141.39674273618235" scale="8 4.5 8" rotation="-0.9723886116101704 166.0967835382061 -1.9531235914508571" material="" geometry=""></a-box>
+
+      <a-box id="#sunflowers-4" gblock="https://poly.google.com/view/2SK_cDFDz-y" position="-121.27099949556477 -0.102 141.397" scale="8 4.5 8" rotation="-0.9720000000000001 166.097 -1.953" material="" geometry=""></a-box>
+      
+      
+
+<a-entity id="#hedges" position="84.61725125060136 .5 262.0921845111543" rotation="0 -97.54147185112619 0">
+      <a-box id="#rainbow1" gblock="https://poly.google.com/view/ccsMv5xgcB8" position="-167.144 -1 177.253" scale="10 10 26.02515571485743" material="side:double" geometry=""></a-box>
+      <a-box id="#rainbow4" gblock="https://poly.google.com/view/ccsMv5xgcB8" position="-143.03245555500303 -1 225.3425895968888" scale="10 10 21.754677775422135" rotation="0 -133.54173521351663 0" material="side:double" geometry=""></a-box>
+</a-entity>
+      
+<a-entity id="#rainbowsignmodel" position="-155.85544471330223 -1.667 121.76584650662545" scale="19 19 19" gblock="https://poly.google.com/view/3-_tZTHUvtk" rotation="0.30599999999999855 64.43653070682261 -4.973" geometry="">
+  
+       <a-entity id="Rainbowsign" position="-5.103340768654572 0.65 -1.7839213413126405" rotation="0 90 0" scale="0.1 0.1 0.1">
+        <a-entity position="-26 3.35 52" scale="0.1 0.2 0.5" mixin="boldFont" text-geometry="value:Ask Yourself:;curveSegments:4;height:0.3;size:4.5;weight:bold" material="color:#ff0000" shadow=""></a-entity>
+        <a-entity position="-26 2.45 52" scale="0.2 0.5 0.5" mixin="boldFont" text-geometry="value:How Do I Feel When I Walk;curveSegments:4;height:0.3;size:1.85;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+        <a-entity position="-26 1 52" mixin="boldFont" text-geometry="value:Amongst Plants?;curveSegments:4;height:0.3;size:1.4;weight:bold" material="color:#ffffff" shadow="" scale="0.75 0.75 1"></a-entity>
+  <a-entity mixin="boldFont" text-geometry="curveSegments:4;height:0.3;size:1" material="color:#ff0000" shadow=""></a-entity>
+      </a-entity>
+        </a-entity>
+      
+      
+        
+      
+      
+      
+      
+      <a-sphere 
+          gblock="https://poly.google.com/view/dwSigTeSMCo" 
+          color="aqua" scale="120 120 100" 
+          position="197.50312862038433 33.330793301894366 -105.963341086484757" 
+                ></a-sphere>
+      
+<a-sphere 
+          gblock="https://poly.google.com/view/dwSigTeSMCo" 
+          color="aqua" scale="120 120 100" 
+          position="141.50312862038433 33.330793301894366 105.963341086484757" 
+          ></a-sphere>
+      
+      
+      
+      
+<!--   <a-sphere  
+          gblock="https://poly.google.com/view/dwSigTeSMCo" 
+          color="aqua" scale="120 120 100" 
+          position="60.50312862038433 27.330793301894366 135.963341086484757" 
+         
+          material="" geometry=""
+          ></a-sphere> -->
+            
+<!-- <a-sphere  
+          gblock="https://poly.google.com/view/dwSigTeSMCo" 
+          color="aqua" 
+          scale="88.68330046570935 125 109.42924947130334" 
+          position="-9.316668566020544 34.929907414761045 -158.49900667549977"
+          
+          material="" geometry="" 
+          rotation="0 121.67863380010303 0"
+          ></a-sphere> -->
+      
+      
+         <!-- Large Central Tree -->
+<a-box 
+       gblock="https://poly.google.com/view/5QggV-uk3UD" 
+       id="Shroom" 
+       color="#FFEC77" 
+       position="71.438 3.612 91.43008248309201" 
+       scale="5.5 5.5 5.5" rotation="3.2999999999999994 -165.3000540915997 175.732"
+       material="" geometry="" ></a-box>          
+  
+<a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+       id="Shroomforest"
+       color="#FFEC77" 
+       position="314.007 2.867 111.904"
+       rotation="3.3 -165.3 175.732" 
+       material="" 
+       geometry="" 
+       ></a-box>   
+      
+      <a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+             id="Shroomforest2" 
+             color="#FFEC77" 
+             position="197.45604479864215 2.867 -13.24029542359817"
+             rotation="3.3000000000000003 7.522829458681613 175.732" 
+             material="" 
+             geometry="" ></a-box>
+      
+      <a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+             id="Shroomforest3"
+             color="#FFEC77" 
+             position="216.85232458356145 -0.6161753802655072 -28.37395698006685" 
+             rotation="3.300000000000001 46.21398020434581 175.732"
+             material="" 
+             geometry="" 
+             ></a-box>
+      
+      <a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+             id="Shroomforest4" 
+             color="#FFEC77"
+             position="235.77045527277053 2.867 6.317129493914587" 
+             rotation="3.3000000000000007 51.823059692622614 175.732" 
+             material="" geometry="" ></a-box>
+      
+     <a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+            id="Shroom5" color="#FFEC77" 
+            position="-157.51361838311112 2.867 169.40041288101722" 
+            rotation="3.3 -165.3 175.732" 
+            material="" geometry=""></a-box>
+
+     <a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+            id="Shroomforest5" color="#FFEC77" 
+            position="284.2358434505691 2.867 64.00722458582467" 
+            rotation="3.3 -165.3 175.732" 
+            material="" 
+            geometry=""></a-box>
+
+<a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+       id="Shroomforest6" color="#FFEC77"
+       position="249.15039027621538 2.867 101.01815165788761" 
+       rotation="3.3000000000000003 7.522829458681613 175.732" 
+       material=""
+       geometry=""></a-box>
+
+<a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+       id="Shroomforest7" 
+       color="#FFEC77" 
+       position="220.31207349379892 2.867 166.04322922318516"
+       rotation="3.3000000000000007 51.823059692622614 175.732" 
+       material=""
+       geometry=""></a-box>
+
+<a-box gblock="https://poly.google.com/view/5QggV-uk3UD"
+       id="Shroomforest8"
+       color="#FFEC77" 
+       position="209.51609046928618 -0.6161753802655072 133.21899310028513" 
+       rotation="3.300000000000001 46.21398020434581 175.732"
+       material="" 
+       geometry=""></a-box>
+
+<a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+       id="Shroomforest9"
+       color="#FFEC77" 
+       position="240.9789915294508 2.867 196.46463583062618"
+       rotation="3.3 -165.3 175.732" 
+       material="" 
+       geometry=""></a-box>
+
+<a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+       id="Shroomforest10" 
+       color="#FFEC77" 
+       position="187.92890715936758 2.867 169.53285017061984" 
+       rotation="3.3000000000000003 7.522829458681613 175.732"
+       material=""
+       geometry=""></a-box>
+
+
+<a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+       id="Shroomforest11"
+       color="#FFEC77" 
+       position="132.01488188658843 2.867 166.04322922318516"
+       rotation="3.3000000000000007 51.823059692622614 175.732"
+       material="" 
+       geometry=""></a-box>
+
+<a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+       id="Shroomforest12" color="#FFEC77"
+       position="123.72718887389777 2.867 241.87100431871696"
+       rotation="3.3 -165.3 175.732"
+       material=""
+       geometry=""></a-box>
+
+<a-box gblock="https://poly.google.com/view/5QggV-uk3UD"
+       id="Shroomforest13" 
+       color="#FFEC77" 
+       position="38.931911352955495 -0.6161753802655072 181.5308509272431" 
+       rotation="3.300000000000001 46.21398020434581 175.732" 
+       material="" 
+       geometry=""></a-box>
+
+<a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+       id="Shroomforest14"
+       color="#FFEC77"
+       position="-53.628745118152437 2.867 199.53285017061984" 
+       rotation="3.3000000000000003 7.522829458681613 175.732" 
+       material="" 
+       geometry=""></a-box>
+      
+      <a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+       id="Shroomforest15"
+       color="#FFEC77" 
+       position="102.01488188658843 2.867 196.04322922318516"
+       rotation="3.3000000000000007 51.823059692622614 175.732"
+       material="" 
+       geometry=""></a-box>
+
+<a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+       id="Shroomforest16" color="#FFEC77"
+       position="93.72718887389777 2.867 271.87100431871696"
+       rotation="3.3 -165.3 175.732"
+       material=""
+       geometry=""></a-box>
+
+<a-box gblock="https://poly.google.com/view/5QggV-uk3UD"
+       id="Shroomforest17" 
+       color="#FFEC77" 
+       position="8.931911352955495 -0.6161753802655072 211.5308509272431" 
+       rotation="3.300000000000001 46.21398020434581 175.732" 
+       material="" 
+       geometry=""></a-box>
+
+<a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+       id="Shroomforest18"
+       color="#FFEC77"
+       position="-53.628745118152437 2.867 199.53285017061984" 
+       rotation="3.3000000000000003 7.522829458681613 175.732" 
+       material="" 
+       geometry=""></a-box>
+      
+      <a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+       id="Shroomforest19"
+       color="#FFEC77" 
+       position="0 2.867 166.04322922318516"
+       rotation="3.3000000000000007 51.823059692622614 175.732"
+       material="" 
+       geometry=""></a-box>
+
+<a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+       id="Shroomforest20" color="#FFEC77"
+       position="-8 2.867 241.87100431871696"
+       rotation="3.3 -165.3 175.732"
+       material=""
+       geometry=""></a-box>
+
+<a-box gblock="https://poly.google.com/view/5QggV-uk3UD"
+       id="Shroomforest21" 
+       color="#FFEC77" 
+       position="-100 -0.6161753802655072 181.5308509272431" 
+       rotation="3.300000000000001 46.21398020434581 175.732" 
+       material="" 
+       geometry=""></a-box>
+
+<a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+       id="Shroomforest22"
+       color="#FFEC77"
+       position="-180 2.867 199.53285017061984" 
+       rotation="3.3000000000000003 7.522829458681613 175.732" 
+       material="" 
+       geometry=""></a-box>
+      
+      <a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+       id="Shroomforest23"
+       color="#FFEC77" 
+       position="-28 2.867 196.04322922318516"
+       rotation="3.3000000000000007 51.823059692622614 175.732"
+       material="" 
+       geometry=""></a-box>
+
+<a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+       id="Shroomforest24" color="#FFEC77"
+       position="-37 2.867 271.87100431871696"
+       rotation="3.3 -165.3 175.732"
+       material=""
+       geometry=""></a-box>
+
+<a-box gblock="https://poly.google.com/view/5QggV-uk3UD"
+       id="Shroomforest25" 
+       color="#FFEC77" 
+       position="-121 -0.6161753802655072 211.5308509272431" 
+       rotation="3.300000000000001 46.21398020434581 175.732" 
+       material="" 
+       geometry=""></a-box>
+
+<a-box gblock="https://poly.google.com/view/5QggV-uk3UD" 
+       id="Shroomforest26"
+       color="#FFEC77"
+       position="-183.628745118152437 2.867 199.53285017061984" 
+       rotation="3.3000000000000003 7.522829458681613 175.732" 
+       material="" 
+       geometry=""></a-box>
+
+         <!-- Mountainscape bounces to Bass --> 
+<a-sphere gblock="https://poly.google.com/view/8dIvnrMrjnP" 
+          color="aqua" position="-61.52094745402075 -1.5 57.260881364194525"
+          scale=".8 .8 .8"
+     
+          material="" geometry=""
+          ></a-sphere>
+      
+
+      
+  <a-sphere gblock="https://poly.google.com/view/8dIvnrMrjnP" 
+          color="aqua" position="-51.23337784 -1.5 46.2677212441531"
+          scale=".8 .8 .8"
+    
+          material="" geometry=""
+            ></a-sphere>
+      
+  <a-sphere gblock="https://poly.google.com/view/8dIvnrMrjnP" 
+          color="aqua" position="-46.09 -1.5 41.26430130417383"
+          scale=".8 .8 .8"
+   
+          material="" geometry=""
+            ></a-sphere>
+                
+  <a-sphere gblock="https://poly.google.com/view/8dIvnrMrjnP" 
+          color="aqua" position="-40.95 -1.5 35.27"
+          scale=".8 .8 .8"
+      
+          material="" geometry=""
+          ></a-sphere>
+                
+      
+  <a-sphere gblock="https://poly.google.com/view/8dIvnrMrjnP" 
+          color="aqua" position="-37 -1.5 25"
+          scale=".8 .8 .8"
+         
+          material="" geometry=""
+          ></a-sphere>
+
+      
+      
+      
+      <a-sphere gblock="https://poly.google.com/view/ahT2_ZxtLIq" 
+                 scale="1.2 1.8 .8"
+                color="aqua" position="-12.500 -1.287 -9" 
+                audioanalyser="src:#song" 
+                audio-level-scale="positionScale:2 2 2" material="" geometry=""
+                static-body></a-sphere>
+      
+      <a-sphere gblock="https://poly.google.com/view/ahT2_ZxtLIq" 
+                 scale="1.2 1.8 .8"
+                color="aqua" position="50 -.2 -99" 
+                audioanalyser="src:#song" 
+                audio-level-scale="positionScale:1 1 1" material="" geometry=""
+                static-body></a-sphere>  
+      
+      
+      <!-- apple orchard -->
+        
+          <a-box gblock="https://poly.google.com/view/cpg6wP8JCyQ" 
+           color="#FFEC77" 
+           position="-60.463 -1.54231424153527645 -21.641" 
+           scale="1 1.822 1" 
+           rotation="0 90 -1.292" 
+           audioanalyser="src:#song" 
+           audio-level-scale="sizeScale:0 2 1;offsetY:true" 
+           material="" geometry="" 
+           static-body="" 
+           velocity=""></a-box>
+      
+          <a-box gblock="https://poly.google.com/view/cpg6wP8JCyQ" 
+           color="#FFEC77" 
+           position="-60.463 -1.54231424153527645 -31.641" 
+           scale="1 1.822 1" 
+           rotation="0 90 -1.292" 
+           audioanalyser="src:#song" 
+           audio-level-scale="sizeScale:0 2 1;offsetY:true" 
+           material="" geometry="" 
+           static-body="sphereRadius:NaN" 
+           velocity=""></a-box>
+      
+          <a-box gblock="https://poly.google.com/view/cpg6wP8JCyQ" 
+           color="#FFEC77" 
+           position="-60.463 -1.54231424153527645 -41.641" 
+           scale="1 1.822 1" 
+           rotation="0 90 -1.292" 
+           audioanalyser="src:#song" 
+           audio-level-scale="sizeScale:0 2 1;offsetY:true" 
+           material="" geometry="" 
+           static-body="sphereRadius:NaN" 
+           velocity=""></a-box>
+      
+          <a-box gblock="https://poly.google.com/view/cpg6wP8JCyQ" 
+           color="#FFEC77" 
+           position="-60.463 -1.54231424153527645 -51.641" 
+           scale="1 1.822 1" 
+           rotation="0 90 -1.292" 
+           audioanalyser="src:#song" 
+           audio-level-scale="sizeScale:0 2 1;offsetY:true" 
+           material="" geometry="" 
+           static-body="sphereRadius:NaN" 
+           velocity=""></a-box>
+      
+
+
+
+      
+      
+      
+      
+      <!-- Signage-->
+<a-entity id="Controllers" position="-17.88347142730095 3.8030984153134444 29.46804336755735" 
+          scale="4 4 4" gpoly="polyid:do49XXyyqML;API_KEY:AIzaSyDpRXE0kQxU-GFniI5b-c4mux4drR_uVwk" 
+          rotation="0 -179.1329310775109 0" 
+          obj-model="obj:https://poly.googleapis.com/downloads/do49XXyyqML/94vEG6KWB91/model.obj;mtl:https://poly.googleapis.com/downloads/do49XXyyqML/94vEG6KWB91/materials.mtl"></a-entity>
+    
+     
+
+      
+<a-entity id="Meet our Team" 
+          position="-32.405149474180945 3.8030984153134444 30.5" 
+          scale="4 4 4" 
+          gpoly="polyid:do49XXyyqML;API_KEY:AIzaSyDpRXE0kQxU-GFniI5b-c4mux4drR_uVwk"
+          rotation="0 -175.23530183609014 0" 
+          obj-model="obj:https://poly.googleapis.com/downloads/do49XXyyqML/94vEG6KWB91/model.obj;mtl:https://poly.googleapis.com/downloads/do49XXyyqML/94vEG6KWB91/materials.mtl"></a-entity>
+      
+      
+      
+      <!-- Meet Our Team Area-->
+<a-image id="Blantonphoto" 
+         src="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fblanton.jpg?1533016938794" 
+         width="9.6" height="6.4" 
+         material="height:384;width:768" 
+         geometry="" position="-99.54199537716417 17.709656777089544 37.41182942268695" 
+         rotation="3.6844942113735786 73.44361518108191 3.1228875829162894" 
+         scale="2.134867201860277 2.569209001165666 1"></a-image>
+      
+      <a-entity id="DrBlantonBio" 
+                position="-138.624 1.645 5.139" 
+                rotation="0 81.76608516240759 0" 
+                scale="1.5 2 1"> 
+                        <a-entity 
+                                  position="-24 5 50" 
+                                  scale=".1 .2 .5" 
+                                  mixin="boldFont"
+                                  text-geometry="value:Dr. Larry Blanton;curveSegments:4;height:0.3;size:4.5"
+                                  material="color:#ff0000" shadow=""></a-entity>
+        <a-entity 
+                                  position="-24 4 50" 
+                                  scale=".1 .2 .5" 
+                                  mixin="boldFont"
+                                  text-geometry="value:Professor and Director of Graduate Programs in Plant Biology;curveSegments:4;height:0.3;size:4.5"
+                                  material="color:#ffffff" shadow=""></a-entity>
+        <a-entity 
+                                  position="-24 3 50" 
+                                  scale=".1 .2 .5" 
+                                  mixin="boldFont"
+                                  text-geometry="value:Principal Investigator;curveSegments:4;height:0.3;size:4.5"
+                                  material="color:#ff0000" shadow=""></a-entity>
+                      <a-entity 
+                                mixin="boldFont"
+                                text-geometry="value:;curveSegments:4;height:0.3;size:1"
+                                material="color:#ff0000" shadow=""></a-entity>
+      </a-entity>
+      
+      
+      <a-entity id="PrestonBio" position="132.3901273434992 -0.786 -29.08725484435743" rotation="0 154.56113126945453 0" scale="1.5 2 1"> 
+                        <a-entity position="-24.805596099027586 6.834316823869528 51.88255847336556" scale="0.1 0.2 1" mixin="boldFont" text-geometry="value:This Area Created By:;curveSegments:4;height:0.3;size:4.5" material="color:#ff0000" shadow=""></a-entity>
+        <a-entity position="-26 2 52" scale="0.1 0.2 0.3" mixin="boldFont" text-geometry="value:Preston Montague;curveSegments:4;height:0.3;size:4.5" material="color:#ffffff" shadow=""></a-entity>
+        <a-entity position="-25.849358559344 0.9 51.761622058041056" scale="0.1 0.2 1" mixin="boldFont" text-geometry="value:Botanical Illustrator/ Landscape Architect;curveSegments:4;height:0.3;size:4.5" material="color:#ff0000" shadow=""></a-entity>
+        <a-image id="Prestonphoto" src="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2F965691_10152009842142442_944928135_o.jpg?1536212425918" width="7.2" height="7.2" material="" geometry="" position="-22.510390717865096 3.8706889299010845 51.994805116955675"></a-image>           
+        
+        <a-entity mixin="boldFont" text-geometry="curveSegments:4;height:0.3;size:1" material="color:#ff0000" shadow=""></a-entity>
+      </a-entity>
+      
+      
+<a-image id="Rogersphoto" 
+         src="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Frogers-6947.jpg?1533016940310" 
+         width="7.2" height="7.2"
+         material="" geometry="" 
+         position="-72.11574596371011 7.9857430446357242 53.69194473976281" 
+         rotation="0 154.56113126945453 0"></a-image>
+      
+      <a-entity id="AdamRogersBio" 
+                position="-122.048 -.786 86.106" 
+                rotation="0 154.56113126945453 0" 
+                scale="1.5 2 1"> 
+                        <a-entity 
+                                  position="-26 3.45 52" 
+                                  scale=".1 .2 1" 
+                                  mixin="boldFont"
+                                  text-geometry="value:Adam Rogers;curveSegments:4;height:0.3;size:4.5"
+                                  material="color:#ff0000" shadow=""></a-entity>
+        <a-entity 
+                                  position="-26 2.55 52" 
+                                  scale=".1 .2 .3" 
+                                  mixin="boldFont"
+                                  text-geometry="value:Head of Making and Innovation Studio, NCSU Libraries;curveSegments:4;height:0.3;size:4.5"
+                                  material="color:#ffffff" shadow=""></a-entity>
+        <a-entity 
+                                  position="-26 1.55 52" 
+                                  scale=".1 .2 1" 
+                                  mixin="boldFont"
+                                  text-geometry="value:Investigator;curveSegments:4;height:0.3;size:4.5"
+                                  material="color:#ff0000" shadow=""></a-entity>
+                      <a-entity 
+                                mixin="boldFont"
+                                text-geometry="value:;curveSegments:4;height:0.3;size:1"
+                                material="color:#ff0000" shadow=""></a-entity>
+      </a-entity>
+      
+<a-image id="Keenanphoto" 
+         src="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fkeenan%20ncsu.jpg?1533016937387" 
+         width="7.2" height="7.4" 
+         material="" geometry="" 
+         position="-69 7.1 32.80568033984945" 
+         rotation="0 3.935927463748984 0" 
+         scale="1.666482370678937 1.1370382716603284 1"></a-image>   
+      
+            <a-entity id="ColinKeenanBio" 
+                position="-46.788 -1.8026 -23.188" 
+                rotation="0 11.644 0" 
+                scale="1.5 2 1"> 
+                        <a-entity 
+                                  position="-26 3 52" 
+                                  scale=".1 .2 .5" 
+                                  mixin="boldFont"
+                                  text-geometry="value:Colin Keenan;curveSegments:4;height:0.3;size:4.5"
+                                  material="color:#ff0000" shadow=""></a-entity>
+        <a-entity 
+                                  position="-26 2 52" 
+                                  scale=".1 .2 .5" 
+                                  mixin="boldFont"
+                                  text-geometry="value:Dept. of Plant and Microbial Biology/ NCSU Libraries;curveSegments:4;height:0.3;size:4.5"
+                                  material="color:#ffffff" shadow=""></a-entity>
+        <a-entity 
+                                  position="-26 1 52" 
+                                  scale=".1 .2 .5" 
+                                  mixin="boldFont"
+                                  text-geometry="value:Investigator;curveSegments:4;height:0.3;size:4.5"
+                                  material="color:#ff0000" shadow=""></a-entity>
+                      <a-entity 
+                                mixin="boldFont"
+                                text-geometry="value:;curveSegments:4;height:0.3;size:1"
+                                material="color:#ff0000" shadow=""></a-entity>
+      </a-entity>
+      <!-- 3d scans-->
+     
+      
+     
+        
+       <!-- Area: Why VR? -->
+      <a-box gblock="https://poly.google.com/view/fVYcaMt-oTM"
+             color="#FFEC77" position="146.80194333023974 -2.721 1.2799348497159144" 
+             scale="1 1 1" 
+             rotation="0 0 0" 
+             material="side:double" geometry=""></a-box>
+      
+      <a-entity id="WhyVR" 
+                position="47.541 14.652 -56.204" 
+                scale="24 30 24" 
+                gpoly="polyid:do49XXyyqML;API_KEY:AIzaSyDpRXE0kQxU-GFniI5b-c4mux4drR_uVwk" 
+                rotation="0 136.660 0" 
+                obj-model="obj:https://poly.googleapis.com/downloads/do49XXyyqML/94vEG6KWB91/model.obj;mtl:https://poly.googleapis.com/downloads/do49XXyyqML/94vEG6KWB91/materials.mtl">
+      </a-entity>
+     
+      
+     
+      <a-text position="38.79603413861482 21.333 -61.27729299428465"
+              rotation="-7.737923104558148 -36.15923346239408 -26.76434934273137" 
+              scale="10.577790190939112 40 4.4" 
+              text="value:Why Virtual Reality? -->;side:double;color:#000000">
+      </a-text>
+     
+      
+           
+        
+     
+      
+      <a-entity alongpath="curve:#track1; dur:150000; delay:5000; loop:true; rotate:true;" id="ram">
+    <a-entity rotation="0 0 -5" animation="property: rotation; dir: alternate; dur: 3000; easing: linear; loop: true; to:0 0 5;">
+      <a-entity gblock="https://poly.google.com/view/dYO3d7OrTiR" scale="4 4 4" rotation="0 180 45.89391938997894"></a-entity>
+    </a-entity>
+  </a-entity>
+      
+      
+ <a-curve id="track1" closed="true" type="QuadraticBezier">
+        <a-curve-point position="-132.92660675951373 5 -47.01071603711725" curve-point=""></a-curve-point>
+        <a-curve-point position="-94.13814587385599 5 -86.28330834069465" curve-point=""></a-curve-point>
+        <a-curve-point position="-78.0166956676652 5 -33.68425121166287" curve-point=""></a-curve-point>
+        <a-curve-point position="-29.14377616510268 5 -70.43697382893174" curve-point=""></a-curve-point>
+        <a-curve-point position="-29.14377616510268 5 -2.62013147578325" curve-point=""></a-curve-point>
+     <a-curve-point position="-6.606615234685421 5 1.322509389364029" curve-point=""></a-curve-point>
+        <a-curve-point position="-27 5 -2.62013147578325" curve-point=""></a-curve-point>
+     <a-curve-point position="-9.690572196857925 5 1.322509389364029" curve-point=""></a-curve-point><a-curve-point position="-2.179698945946896 5 17.39408926410014" curve-point=""></a-curve-point><a-curve-point position="-14.092381536449366 5 -54.99671981616629" curve-point=""></a-curve-point>
+        <a-curve-point position="-44.10896091435589 5 -69.45692618703148" curve-point=""></a-curve-point>
+        <a-curve-point position="-54.40763544921753 5 -62.65366972347259" curve-point=""></a-curve-point><a-curve-point position="-64.27186494695248 5 -33.37664474664433" curve-point=""></a-curve-point>
+        <a-curve-point position="-117.85152851498863 5 -34.011340875807775" curve-point=""></a-curve-point>
+        <a-curve-point position="-137.58481572177814 5 -48.727959683204126" curve-point=""></a-curve-point>
+  </a-curve>
+<!--           <a-draw-curve curveref="#track1" material="color: blue; opacity:0.3"></a-draw-curve> -->
+ <a-entity id="RamText" position="-99.46561365342278 1.33479671527618 -7.570839359222656" rotation="0 112.94937219338472 0" scale="1.5 1.5 1">
+        <a-entity position="-26 3.35 52" scale="0.1 0.2 0.5" mixin="boldFont" text-geometry="value:What kind of plant produced this 'Ram's Horn'?;curveSegments:4;height:0.3;size:4.5;weight:bold" material="color:#ff0000" shadow=""></a-entity>
+        <a-entity position="-26 2.45 52" scale="0.2 0.5 0.5" mixin="boldFont" text-geometry="value:Where in the world does it grow?;curveSegments:4;height:0.3;size:1.85;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+        <a-entity position="-26 0.55 52" mixin="boldFont" text-geometry="value:FOLLOW IT TO FIND OUT!;curveSegments:4;height:0.3;size:1.4;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+        <a-entity position="-26 -0.43562594244788977 52" scale="0.23861578198674271 0.5847148834840049 0.181746062274598" mixin="boldFont" text-geometry="value:Can't find the specimen? Here's what it looks like:;curveSegments:4;height:0.3;size:1.4;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+
+  <a-entity mixin="boldFont" text-geometry="curveSegments:4;height:0.3;size:1" material="color:#ff0000" shadow=""></a-entity>
+      </a-entity>
+      
+      <a-image id="ramphoto" 
+               src="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Framshornphoto.jpg?1534728652685" 
+               width="9.6" height="6.4" 
+               material="" 
+               geometry="" 
+               position="-42.16053171917145 6.834378209393847 0.10798779131043901" 
+               rotation="-17.63914516042056 110.30674799990143 -177.25367628721315" 
+               scale="2.135 2.569 1"></a-image>
+      
+      
+     
+      
+      
+     
+       <a-sphere gblock="https://poly.google.com/view/dYO3d7OrTiR" 
+                color="pink" 
+                scale="7 7 7" 
+                position="-185.672 6.926 -118.277" 
+                animation="property:rotation;dir:alternate;dur:20000;delay:8000;easing:linear;loop:true;to:359 359 359" 
+                material="" 
+                geometry="" 
+                rotation="0 0 0" 
+                id="RamInCenter2"></a-sphere>
+      
+      <a-sphere gblock="https://poly.google.com/view/dYO3d7OrTiR" 
+                color="pink" 
+                scale="8 8 8"
+                position="-165.672 4.926 -118.277" 
+                animation="property:rotation;dir:alternate;dur:30000;delay:5000;easing:linear;loop:true;to:359 359 359" material=""
+                geometry="" 
+                rotation="274.15200000000004 340.918 278.788"
+                id="RamInCenter3"></a-sphere>
+      
+      
+
+<a-entity id="#agaveamericana" 
+gblock="https://poly.google.com/view/3GQP4qtvMwB"
+ position="127.29016259011905 0.2538545350272514 97.37697336811823"
+ scale="0.02 0.01 0.05"
+ rotation="-90 0 0"></a-entity>
+      
+<a-entity id="#Ferocactus_wislizenii" 
+          gblock="https://poly.google.com/view/6ugOUjdDlyL" 
+          position="-161.35997196414831 0 -98.446" 
+          scale="0.1 0.1 0.1" rotation="-90 0 0"></a-entity>
+
+
+<a-entity id="#Astrophytum_ornatum3" 
+gblock="https://poly.google.com/view/6yy-_rz0qW-" 
+position="-182.24895870286147 0.2538545350272514 -113.75028526005671"
+ scale="0.1 0.1 0.1" 
+rotation="-90 0 0"></a-entity>
+
+<a-entity id="#agaveamericana4" 
+          gblock="https://poly.google.com/view/3GQP4qtvMwB" 
+          position="154.4473430304579 0.2538545350272514 68.22575231368782" 
+          scale="0.05 0.1 0.01" 
+          rotation="-89.99999914622636 67.61257288369174 0"></a-entity>
+
+
+      
+<a-entity id="#Giant_Saguaro 1_a" 
+gblock="https://poly.google.com/view/7_dAHHqQlFU" 
+position="-144.5435815615569 0.2538545350272514 -109.25840671161178" 
+scale="0.02 0.02 0.02" 
+rotation="-90 0 0"></a-entity>
+
+
+<a-entity id="#Giant_Saguaro 2_a" 
+          gblock="https://poly.google.com/view/6FXZvDsnoqn" 
+          position="130.8770099903343 0.2538545350272514 103.9345567055189" 
+          scale="0.02 0.02 0.03"
+          rotation="-90 0 0"></a-entity>
+      
+<a-entity id="#Teddy" 
+          gblock="https://poly.google.com/view/8P5oP2tBHso" 
+          position="160.32563841994914 0.2538545350272514 80.00017756812946" 
+          scale="0.2 0.15 0.1" 
+          rotation="-90 0 0"></a-entity>
+      
+      
+      <!--  Ram's horn education center      -->
+      <a-entity id="#LocalArtistsEntrySign" 
+                    position="205.30939493275028 0 -46.45152303564755" scale="25 23.288 25"
+                    gblock="https://poly.google.com/view/3-_tZTHUvtk" 
+                    rotation="0 -96.5831945351816 0" 
+                  geometry="">
+               <a-tetrahedron id="#lavadoor" 
+                              src="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2FLava_001_COLOR.png?1535064576571" 
+                              ambient-occlusion-map="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2FLava_001_OCC.png?1535064569705" 
+                              displacement-map="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2FLava_001_DISP.png?1535064566021" 
+                              normal-map="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2FLava_001_NRM.png?1535064575605" 
+                              radius="5"
+                              position="-0.30341601310444805 0.18954597402494439 0.3091222256173219"
+                              rotation="37.1866770353903 -28.370690331132995 -47.29997561236167"
+                              material="side:double;repeat:10 10;shader:flat" 
+                              geometry="radius:0.9"></a-tetrahedron>
+                <a-gltf-model id="#throughthelava" 
+                              gltf-model="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2FThrough%20the%20Lava!.glb?1535065928455" 
+                              position="0.728492433113278 0.21312711548807112 0.46310544399219095"
+                              rotation="47.18230184700478 -145.99276930569988 43.93714064793994"></a-gltf-model>
+           <a-gltf-model id="#FloorArrowArtists" 
+                         gltf-model="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Farrow.glb?1535220644545" 
+                         position="-0.4096685061595164 -0.18579091941211484 0.2883835713386406" 
+                         rotation="-84.34714203095488 170.2118852288967 -82.13872461881176"></a-gltf-model>
+        
+       <a-entity id="Artists" position="-5.103340768654572 0.65 -1.7839213413126405" rotation="0 90 0" scale="0.1 0.1 0.1">
+        <a-entity position="-26 3.35 52" scale="0.1 0.2 0.5" mixin="boldFont" text-geometry="value:Featuring the work of;curveSegments:4;height:0.3;size:4.5;weight:bold" material="color:#ff0000" shadow=""></a-entity>
+        <a-entity position="-26 2.45 52" scale="0.2 0.5 0.5" mixin="boldFont" text-geometry="value:Local North Carolina;curveSegments:4;height:0.3;size:1.85;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+        <a-entity position="-26 1 52" mixin="boldFont" text-geometry="value:Botanical Illustrators;curveSegments:4;height:0.3;size:1.4;weight:bold" material="color:#ffffff" shadow="" scale="0.75 0.75 1"></a-entity>
+  <a-entity mixin="boldFont" text-geometry="curveSegments:4;height:0.3;size:1" material="color:#ff0000" shadow=""></a-entity>
+      </a-entity>
+        </a-entity>
+      
+      
+      
+<a-box id="#ramfloor" gblock="https://poly.google.com/view/0tIcqYuyOnJ" position="-262.351 20.335033475842017 -225.903" scale="300 400 300" material="" geometry="" rotation="0.5132880617696018 0 0"></a-box>
+      
+      <a-box id="#ramfloor2" gblock="https://poly.google.com/view/0tIcqYuyOnJ" position="-277.219 20.335 -22.87528711181082" scale="300 400 300" material="" geometry="" rotation="0.513 84.45596182437355 0"></a-box>
+      
+     
+      
+      
+      
+      <a-entity id="#LocalArtistsEntrySign2" 
+                    position="205.30939493275028 0 -46.45152303564755" scale="25 23.288 25"
+                    gblock="https://poly.google.com/view/3-_tZTHUvtk" 
+                    rotation="0 -96.5831945351816 0"></a-entity>
+      
+      
+<a-box id="#preston1" gblock="https://poly.google.com/view/9jMpIvg2kcu" position="215.65696149794013 -1 -136.36820093749287" scale="20 10 10" material="side:double;shader:flat" geometry="" rotation="0 179.35326531352126 0"></a-box>
+
+<a-box id="#preston2" gblock="https://poly.google.com/view/9jMpIvg2kcu" position="234.15764187291666 -1 -102.46373159814868" scale="20 10 10" material="side:double;shader:flat" geometry="" rotation="0 -90.71460313060629 0"></a-box>
+
+<a-box id="#preston3" gblock="https://poly.google.com/view/9jMpIvg2kcu" position="179.5603448779036 -1 -110.06237242132282" scale="20 10 10" material="side:double;shader:flat" geometry="" rotation="0 -115.76970465784211 0"></a-box>
+      
+<a-box id="#preston4" gblock="https://poly.google.com/view/9jMpIvg2kcu" position="229.53900990322572 -1 -75.86140507122279" scale="8 6 8" material="side:double;shader:flat" geometry="" rotation="0 162.00252488274845 0"></a-box>
+
+<a-box id="#preston5" gblock="https://poly.google.com/view/9jMpIvg2kcu" position="168.09805283663562 -1 -83.79136951631443" scale="8 6 8" material="side:double;shader:flat" geometry="" rotation="0 -115.76970465784211 0"></a-box>
+
+<a-box id="#preston6" gblock="https://poly.google.com/view/9jMpIvg2kcu" position="208.94072320500445 -5 -98.66286033975702" scale="5 8 5" material="side:double;shader:flat" audioanalyser="src:#song" 
+           audio-level-scale="sizeScale:0 1 0;offsetY:true" geometry="" rotation="0 -115.76970465784211 0"></a-box>
+
+      
+<a-entity id="#RamEntrySign"
+          position="-23.339263040221457 -9.9 25.350952403763166" 
+          scale="10 20 10" gblock="https://poly.google.com/view/3-_tZTHUvtk"
+          rotation="0 -85.23588059284721 0"></a-entity> 
+      
+      <a-entity id="#RamEducationSign" 
+               position="-126.45336548421139 0 -61.961905984464074" 
+               scale="25 23.288 25" 
+               gblock="https://poly.google.com/view/3-_tZTHUvtk" 
+               rotation="0.30632368463580406 -66.21750692893299 -4.973125486277473" 
+               geometry="">
+               <a-tetrahedron id="#lavadoorRam" 
+                              src="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2FLava_001_COLOR.png?1535064576571" 
+                              ambient-occlusion-map="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2FLava_001_OCC.png?1535064569705" 
+                              displacement-map="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2FLava_001_DISP.png?1535064566021" 
+                              normal-map="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2FLava_001_NRM.png?1535064575605" 
+                              radius="5" 
+                              position="-0.30341601310444805 0.18954597402494439 0.3091222256173219" 
+                              rotation="37.1866770353903 -28.370690331132995 -47.29997561236167"
+                              material="side:double;repeat:10 10;shader:flat" 
+                              geometry="radius:0.9"></a-tetrahedron>
+                <a-gltf-model id="#throughthelavaRam" 
+                              gltf-model="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2FThrough%20the%20Lava!.glb?1535065928455"
+                              position="0.23998711785995777 0.1697733604019412 0.3054724074818056" 
+                              rotation="47.6783477928593 -156.3318775573809 37.6414675806541" 
+                              scale="0.5 0.5 0.5"></a-gltf-model>
+   <a-gltf-model id="#FloorArrowRam" 
+                 gltf-model="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Farrow.glb?1535220644545"
+                 position="-0.4096685061595164 -0.25274162177466736 0.2883835713386406"
+                 rotation="-84.41164978670275 -146.2566841800666 -126.5777309586494"></a-gltf-model>
+        
+      <a-entity id="Ram" position="-5.1144619400964455 0.6490059267518841 -1.7888416451107736" rotation="0 90 0" scale="0.1 0.1 0.1">
+        <a-entity position="-26 3.35 52" scale="0.1 0.2 0.5" mixin="boldFont" text-geometry="value:Come Inside The:;curveSegments:4;height:0.3;size:4.5;weight:bold" material="color:#ff0000" shadow=""></a-entity>
+        <a-entity position="-26 2.45 52" scale="0.2 0.5 0.5" mixin="boldFont" text-geometry="value:Proboscidea louisianica,;curveSegments:4;height:0.3;size:1.85;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+        <a-entity position="-26 1 52" mixin="boldFont" text-geometry="value:'Ram's Horn' Center;curveSegments:4;height:0.3;size:1.4;weight:bold" material="color:#ffffff" shadow="" scale="0.75 0.75 1"></a-entity>
+  <a-entity mixin="boldFont" text-geometry="curveSegments:4;height:0.3;size:1" material="color:#ff0000" shadow=""></a-entity>
+      </a-entity>
+        </a-entity>
+      
+      
+      
+      <a-entity 
+                position="-128.9395901615332 -16.575 -129.622" 
+                rotation="55.007000000000005 -134.069 175.908"
+                light="type:spot;distance:70;color:#00ff00;groundColor:#ffffff;intensity:30" 
+                id="party"></a-entity>
+
+<a-entity position="-228.0668187832946 -16.575 -129.622" 
+          rotation="55.007000000000005 -134.069 175.908"
+          light="type:spot;distance:100;color:#ee11c8;groundColor:#ffffff;intensity:30" 
+          id="party2" animation="property:intensity;dur:10000;loop:true;to:0"
+          intensity="0"></a-entity>
+
+      
+<!--        -->
+      
+      
+<!-- corn building       -->      
+<a-entity gblock="https://poly.google.com/view/arxvjgpDpWR"
+                position="121.94827402112381 0.0 -105.83991398149762" 
+          scale="20 20 20"
+                rotation="0 0 -180"></a-entity> 
+      
+<a-entity gblock="https://poly.google.com/view/arxvjgpDpWR"
+                position="124 0.0 150" 
+          scale="40 40 40" 
+                rotation="180 0 0"></a-entity> 
+      
+<a-entity gblock="https://poly.google.com/view/arxvjgpDpWR"
+                position="129.66 0.0 -366" 
+          scale="80 80 80" 
+                rotation="0 0 -180"></a-entity> 
+      
+<a-entity gblock="https://poly.google.com/view/arxvjgpDpWR"
+                position="136.66 0 658.5" 
+          scale="160 160 160"
+                rotation="180 0 0"></a-entity> 
+      
+            
+            <!-- VR lets us do the impossible. Rare plants can be freely circulated. EVERYONE can explore biodiversity. -->
+      
+<a-sphere id="ncsutableauEVERYONE" 
+          src="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Fbrick_4_diff_1k.jpg?1534711417123"
+          ambient-occlusion-map="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Fbrick_4_AO_1k.jpg?1534711419145"
+          displacement-map="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Fbrick_4_disp_1k.jpg?1534711418094"
+          normal-map="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Fbrick_4_nor_1k.jpg?1534711419312"
+          position="161.175 5.767 -31.539" scale="6.159241275161446 8 3.2"
+          material="repeat:10 10"
+          geometry="">
+      <a-sphere gblock="https://poly.google.com/view/fsgjXBSxjaX"
+                color="red" scale="0.01 0.015 0.01" 
+                position="0 2.7401104126982405 0"
+                animation="property:rotation;dir:alternate;dur:3000;easing:linear;loop:true;to:0 359 0" 
+                material="" geometry="" 
+                rotation="-22.321144258949133 236.94611805548794 -1.2720914777602506"></a-sphere>
+        </a-sphere>
+
+      <a-sphere id="ncsutableauRamInfo" 
+                src="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Fbrick_4_diff_1k.jpg?1534711417123" 
+                ambient-occlusion-map="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Fbrick_4_AO_1k.jpg?1534711419145" 
+                displacement-map="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Fbrick_4_disp_1k.jpg?1534711418094" 
+                normal-map="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Fbrick_4_nor_1k.jpg?1534711419312"
+                position="-41.39327807703462 5.767 14.097276864455576" 
+                scale="3.2 8 3.2" 
+                material="repeat:10 10"
+                geometry="">
+      <a-sphere gblock="https://poly.google.com/view/fsgjXBSxjaX"
+                color="red" 
+                scale="0.01 0.015 0.01" 
+                position="0 2.7401104126982405 0" 
+                animation="property:rotation;dir:alternate;dur:3000;easing:linear;loop:true;to:0 359 0" 
+                material="" 
+                geometry="" 
+                rotation="-37.5078462357683 153.90396265783087 -2.1375880641304126"></a-sphere>
+        </a-sphere>
+      
+    
+<!-- IN VR, educators have total control of the learning environment. Location, size, and scarcity are easily manipulated       -->
+      
+<a-sphere id="ncsutableauANYTHINGPOSSIBLE" 
+          src="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Fbrick_4_diff_1k.jpg?1534711417123"
+          ambient-occlusion-map="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Fbrick_4_AO_1k.jpg?1534711419145" 
+          displacement-map="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Fbrick_4_disp_1k.jpg?1534711418094" 
+          normal-map="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Fbrick_4_nor_1k.jpg?1534711419312" 
+          position="164.52641943917493 5.767 60.23380908681291" 
+          scale="6.4 16 6.4" material="repeat:25 25" geometry="">
+      <a-sphere gblock="https://poly.google.com/view/fsgjXBSxjaX" 
+                color="red" scale="0.01 0.015 0.01"
+                position="0 2.7401104126982405 0" 
+                animation="property:rotation;dir:alternate;dur:3000;easing:linear;loop:true;to:0 359 0" 
+                material="" 
+                geometry="" 
+                rotation="-14.332381595811771 280.6293398320044 -0.8168085055375371"></a-sphere>
+        </a-sphere>
+
+
+
+      
+      <a-entity id="#AnythingPossibleSign" position="109.81804151240308 0 65.72596493436748" scale="25 23.288 25" gblock="https://poly.google.com/view/3-_tZTHUvtk" rotation="0 93.63122882365221 0" geometry="">
+               <a-tetrahedron id="#lavadoordesert" src="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2FLava_001_COLOR.png?1535064576571" ambient-occlusion-map="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2FLava_001_OCC.png?1535064569705" displacement-map="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2FLava_001_DISP.png?1535064566021" normal-map="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2FLava_001_NRM.png?1535064575605" radius="5" position="-0.30341601310444805 0.18954597402494439 0.3091222256173219" rotation="37.1866770353903 -28.370690331132995 -47.29997561236167" material="side:double;repeat:10 10;shader:flat" geometry="radius:0.9"></a-tetrahedron>
+                <a-gltf-model id="#throughthelavadesert" gltf-model="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2FThrough%20the%20Lava!.glb?1535065928455" position="1.0243183383766934 0.213 -0.25604062902454133" rotation="46.695701043922604 -100.70178437712079 43.04663541833087"></a-gltf-model>
+           <a-gltf-model id="#FloorArrowArtistsdesert" gltf-model="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Farrow.glb?1535220644545" position="-0.4096685061595164 0.008579091941211484 0.2883835713386406" rotation="-84.34714203095488 170.2118852288967 -82.13872461881176"></a-gltf-model>
+        
+       <a-entity id="desertalpineSign" position="-5.103340768654572 0.65 -1.7839213413126405" rotation="0 90 0" scale="0.1 0.1 0.1">
+        <a-entity position="-26 3.35 52" scale="0.1 0.2 0.5" mixin="boldFont" text-geometry="value:This technology;curveSegments:4;height:0.3;size:4.5;weight:bold" material="color:#ff0000" shadow=""></a-entity>
+        <a-entity position="-26 2.45 52" scale="0.2 0.5 0.5" mixin="boldFont" text-geometry="value:Empowers EDUCATORS &amp;;curveSegments:4;height:0.3;size:1.85;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+        <a-entity position="-26 1 52" mixin="boldFont" text-geometry="value:Excites STUDENTS;curveSegments:4;height:0.3;size:1.4;weight:bold" material="color:#ffffff" shadow="" scale="0.75 0.75 1"></a-entity>
+  <a-entity mixin="boldFont" text-geometry="curveSegments:4;height:0.3;size:1" material="color:#ff0000" shadow=""></a-entity>
+      </a-entity>
+        </a-entity>
+      
+      <a-entity id="PossibilitiesText" position="240.5686126260009 17.348146951381466 239.12653739039445" rotation="0.7029368919331964 -125.21475708753447 -0.4961137757091851" scale="3 3 3">
+        <a-entity position="-26 3.35 52" scale="0.1 0.2 0.5" mixin="boldFont" text-geometry="value:Re-inventing the Field Trip!;curveSegments:4;height:0.3;size:4.5;weight:bold" material="color:#ff0000" shadow=""></a-entity>
+        <a-entity position="-26 2.45 52" scale="0.2 0.5 0.5" mixin="boldFont" text-geometry="value:Teachers can Create any;curveSegments:4;height:0.3;size:1.85;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+        <a-entity position="-26 0.85 52" mixin="boldFont" text-geometry="value:Destination;curveSegments:4;height:0.3;size:1.4;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+        <a-entity position="-26 0.3 52" scale="0.2 0.2 0.5" mixin="boldFont" text-geometry="value:AND TEACH AMONGST THE IMPOSSIBLE!;curveSegments:4;height:0.3;size:1.4;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+
+  <a-entity mixin="boldFont" text-geometry="curveSegments:4;height:0.3;size:1.4" material="color:#ff0000" shadow=""></a-entity>
+      </a-entity>
+      
+      
+        <a-box id="#desert" 
+               gblock="https://poly.google.com/view/36lUayrIQbh" 
+               position="133.1398297042824 0.24806700381557434 94.4073475121868" 
+               scale="4 4 4" material="" geometry=""></a-box>
+      
+      <a-box id="#desert2" 
+             gblock="https://poly.google.com/view/36lUayrIQbh" 
+             position="131.49861051514597 0.24806700381557434 96.07898323161098" 
+             scale="7.405111944774129 4 15.809797978951206" 
+             material="" geometry=""
+             rotation="0 90.36390163571599 0"></a-box>
+      
+     <a-box id="#desert3" 
+            gblock="https://poly.google.com/view/36lUayrIQbh" 
+            position="146.1501741636501 0.248 81.03778829623617" 
+            scale="7.346396942824236 4 23.103658773090356" 
+            material="" geometry="" 
+            rotation="0 -103.33328763722294 0"></a-box>
+      
+      
+      <a-box id="#alpine" gblock="https://poly.google.com/view/4xJuQq957lU" position="133.1398297042824 0.24806700381557434 114.4073475121868" scale="17.87842890175787 7 7.3050808930409525" material="" geometry=""></a-box>
+
+<a-box id="#alpine2" gblock="https://poly.google.com/view/4xJuQq957lU" position="168.42554052658002 0.28230706750327883 116.07898323161098" scale="20.549638668410164 9.911171489948146 36.21207223676046" material="" geometry="" rotation="0 138.01804353856016 0"></a-box>
+
+<a-box id="#alpine3" gblock="https://poly.google.com/view/aztG12iHtTu" position="132.39597119390646 0.248 136.3876959215118" scale="8.206267848541106 8 23" material="" geometry="" rotation="0 -103.33328763722294 0"></a-box>
+      
+      
+
+<a-entity id="Rare" position="196.85163208155285 -1.2368838687618893 -70.39123676368516" rotation="0 -12.000000000000002 0" scale="1.5 2.599651076230252 1">
+        <a-entity position="-26 3.35 52" scale="0.1 0.2 0.5" mixin="boldFont" text-geometry="value:With educational webVR experiences,;curveSegments:4;height:0.3;size:4.5;weight:bold" material="color:#ff0000" shadow=""></a-entity>
+        <a-entity position="-26 2.45 52" scale="0.2 0.5 0.5" mixin="boldFont" text-geometry="value:RARE and FRAGILE specimens can reach;curveSegments:4;height:0.3;size:1.85;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+        <a-entity position="-26 0.55 52" mixin="boldFont" text-geometry="value:EVERYONE;curveSegments:4;height:0.3;size:1.4;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+        <a-entity position="-26 0 52" scale="0.2 0.2 0.5" mixin="boldFont" text-geometry="value:via a web browser!;curveSegments:4;height:0.3;size:1.4;weight:bold" material="color:#ffffff" shadow=""></a-entity>
+
+  <a-entity mixin="boldFont" text-geometry="curveSegments:4;height:0.3;size:1" material="color:#ff0000" shadow=""></a-entity>
+      </a-entity>
+      
+      
+
+      
+      
+           <a-assets>
+        <img id="pink" src="https://img.gs/bbdkhfbzkk/stretch/http://i.imgur.com/1hyyIUi.jpg" crossorigin="anonymous" />
+        <img src="https://img.gs/bbdkhfbzkk/stretch/https://i.imgur.com/25P1geh.png" id="grid" crossorigin="anonymous">
+        <img src="https://img.gs/bbdkhfbzkk/2048x1024,stretch/http://i.imgur.com/WMNH2OF.jpg" id="chrome" crossorigin="anonymous">
+        <img id="sky" src="https://img.gs/bbdkhfbzkk/2048x2048,stretch/http://i.imgur.com/WqlqEkq.jpg" crossorigin="anonymous" />
+        <a-asset-item id="dawningFont" src="https://cdn.glitch.com/c719c986-c0c5-48b8-967c-3cd8b8aa17f3%2FdawningOfANewDayRegular.typeface.json?1490305922844"></a-asset-item>
+        <a-asset-item id="exoFont" src="https://cdn.glitch.com/c719c986-c0c5-48b8-967c-3cd8b8aa17f3%2Fexo2Black.typeface.json?1490305922150"></a-asset-item>
+        <a-asset-item id="exoItalicFont" src="https://cdn.glitch.com/c719c986-c0c5-48b8-967c-3cd8b8aa17f3%2Fexo2BlackItalic.typeface.json?1490305922725"></a-asset-item>
+      </a-assets>
+      
+<a-entity position="170.1971813935133 3.4884227064065128 41.85411433736728" rotation="-7.738 -119.99999999999999 -26.764000000000003" scale="2.2612831612717548 2.2692901479220193 -1.3240783109998264">
+     <a-entity
+          rotation="0 0 5"
+          position="-1.967 7.599 -10.45"
+          text-geometry="value: Because; font: #dawningFont; bevelEnabled: true; bevelSize: 0.05; bevelThickness: 0.05; curveSegments: 12; size: 1; height: 0;"
+          material="color:lavenderblush; metalness:1; roughness: 0; sphericalEnvMap: #pink;"
+        ></a-entity>
+
+        <a-entity position="-2.4 5.764 -11.169" scale="0.6 1.2 1" text-geometry="value: Anything Is Possible; font: #exoFont; bevelEnabled: true; bevelSize: 0.1; bevelThickness: 0.1; curveSegments: 1; size: 1.5; height: 0.5;" material="color:pink; metalness:0.9; roughness: 0.05; sphericalEnvMap: #chrome;"></a-entity>
+
+        <a-entity position="1 4.378 -8" text-geometry="value: in this classroom; font: #exoItalicFont; style: italic; size: 0.8; weight: bold; height: 0;"
+                  material="shader: flat; color: white"></a-entity>
+        <a-entity position="1 4.378 -8" text-geometry="value: in this classroom; font: #exoItalicFont; style: italic; size: 0.8; weight: bold; height: 0; bevelEnabled: true; bevelSize: 0.04; bevelThickness: 0.04; curveSegments: 1"
+                  material="shader: flat; color: white; transparent: true; opacity: 0.4"></a-entity>
+      </a-entity>
+      
+      
+      <!-- Ground-->
+      
+      <a-plane id="ground"
+               src="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fbrown_mud_leaves_01_diff_1k.jpg?1533832146946"
+               geometry=""
+               material="repeat:30 30;shader:flat" 
+               rotation="-90 0 0" 
+               position="30.906364004773792 0.3 0" 
+               scale="599.665701545424 591.5616925348565 1"
+               ambient-occlusion-map="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fbrown_mud_leaves_01_AO_1k.jpg?1533832391422"
+               displacement-map="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fbrown_mud_leaves_01_disp_1k.jpg?1533832391238"
+               normal-map="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fbrown_mud_leaves_01_Nor_1k.jpg?1533832391727"
+               ></a-plane>
+      
+      
+<!-- <a-entity gltf-model="https://cdn.glitch.com/4e6b1455-e46b-4e3d-885b-b9f44106b224%2Fnavmesh.gltf?1533867396411; visible: false"  
+              id="floor" nav-mesh="" 
+           visible="false"></a-entity>  -->
+      
+<a-entity gltf-model="https://cdn.glitch.com/824a1031-4ef2-4f88-8055-89fb27cd5abe%2Fnavmesh2.gltf?1535077383551; visible: false"   
+              id="floor" nav-mesh="" 
+           visible="false"></a-entity>
+      
+      
+    
+    
+      
+      <!--walls     -->
+      <a-plane id="behindwall" 
+               src="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fwooden_rough_planks_diff_4k.jpg?1534385835489" 
+               geometry="" 
+               material="repeat:50 1.5;side:double;shading: flat" 
+               position="0 3.3 293.3481065494604"
+               scale="774.53 8 1" 
+               rotation="0 180 180" 
+               ambient-occlusion-map="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fbrown_mud_leaves_01_AO_1k.jpg?1533832391422"
+               displacement-map="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fwooden_rough_planks_Disp_4k.jpg?1534385792188" 
+               normal-map="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fwooden_rough_planks_Nor_4k.jpg?1534385802158" 
+               ></a-plane>
+
+
+      <a-plane id="aheadwall" 
+              src="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fwooden_rough_planks_diff_4k.jpg?1534385835489" 
+              geometry="" material="repeat:50 1.5;side:double;shading: flat"
+              position="0 3.3 -293.3481065494604" 
+               scale="774.53 6.4 1" 
+               rotation="0 180 180"
+              ambient-occlusion-map="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fbrown_mud_leaves_01_AO_1k.jpg?1533832391422" 
+              displacement-map="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fwooden_rough_planks_Disp_4k.jpg?1534385792188" 
+              normal-map="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fwooden_rough_planks_Nor_4k.jpg?1534385802158"
+              ></a-plane>
+      
+         <a-plane id="leftwall" 
+                  src="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fwooden_rough_planks_diff_4k.jpg?1534385835489"
+                  geometry=""
+                  material="repeat:50 1.5;side:double" 
+                  position="281.70362477835374 3.3 0"
+                  scale="674.53 6.4 1" 
+                  rotation="0 90 180"
+                  ambient-occlusion-map="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fbrown_mud_leaves_01_AO_1k.jpg?1533832391422" 
+                  displacement-map="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fwooden_rough_planks_Disp_4k.jpg?1534385792188" 
+                  normal-map="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fwooden_rough_planks_Nor_4k.jpg?1534385802158"></a-plane>
+
+      <a-plane id="rightwall" 
+              src="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fwooden_rough_planks_diff_4k.jpg?1534385835489" 
+              geometry="" material="repeat:50 1.5;side:double;shading: flat"
+              position="-269.0975737956764 3.3 0" 
+               scale="674.53 6.4 1" 
+               rotation="0 90 180"
+              ambient-occlusion-map="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fbrown_mud_leaves_01_AO_1k.jpg?1533832391422" 
+              displacement-map="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fwooden_rough_planks_Disp_4k.jpg?1534385792188" 
+              normal-map="https://cdn.glitch.com/7f234779-bf13-4f23-a18b-545ac5e1f1b9%2Fwooden_rough_planks_Nor_4k.jpg?1534385802158"
+              ></a-plane>
+      
+      <!-- hand controls -->
+
+      
+           </a-scene>
+
+    <div class="audio-controls">
+      <button class="control pause-btn interact" type="button" name="pause-button">Play</button>
+      <div class="control volume-adjust">
+        <h4 class="volume-label">Volume: </h4>
+        <input type="range" class="volume-slider interact" name="volume-slider" min="0" max="1" value="0.15" step="0.025">
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" src="./audio-controls.js"></script>
+</html>
